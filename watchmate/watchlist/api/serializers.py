@@ -1,9 +1,10 @@
 from rest_framework import serializers
-from ..models import Movie
+from ..models import Watchlist, StreamingPlatform
 
-class MovieSerializer(serializers.ModelSerializer):
+class WatchlistSerializer(serializers.ModelSerializer):
+    # len_name = serializers.SerializerMethodField()
     class Meta:
-        model = Movie
+        model = Watchlist
         fields = "__all__"
         extra_kwargs = {
             "id": {"read_only": True},
@@ -19,7 +20,14 @@ class MovieSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Title is too short")
         return data
     
+
+class StreamingPlatformSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StreamingPlatform
+        fields = "__all__"
     
+    # def get_len_name(self, object):
+    #     return len(object.title)
 
 # def title_length(value):
 #     if len(value) < 2:

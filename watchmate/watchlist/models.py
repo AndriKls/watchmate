@@ -17,12 +17,19 @@ class StreamingPlatform(models.Model):
 class Watchlist(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=200)
-    platform = models.ForeignKey(StreamingPlatform, on_delete=models.CASCADE, related_name="watchlist", null=True)
+    platform = models.ForeignKey(
+        StreamingPlatform, on_delete=models.CASCADE, related_name="watchlist", null=True)
     active = models.BooleanField(default=True)
+    avg_rating = models.FloatField(default=0)
+    number_rating = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.title
+    
+    
+
+
 
 class Review(models.Model):
     review_user = models.ForeignKey(User, on_delete=models.CASCADE)
